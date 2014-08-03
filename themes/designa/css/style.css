@@ -97,6 +97,7 @@ td{vertical-align:top}
 ------------------------------------------------------------- */
 form{margin-top: 2em;}
 form li{margin-bottom: 1.5em;}
+form .row.buttons { margin:10px; }
 label{display: block; margin-bottom:1em; font-weight: 700;}
 input, select, textarea {
 	border: 1px solid #DDD;
