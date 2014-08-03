@@ -46,6 +46,7 @@
 					'items'=>array(
 						array('label'=>'Home', 'url'=>array('/site/index')),
 						array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
+                                                array('label'=>'Portfolio','url'=>array('site/page','view'=>'portfolio')),
 						array('label'=>'Contact', 'url'=>array('/site/contact')),
 						array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
 						array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
@@ -223,11 +224,11 @@
 <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/scripts.js"></script>
 
 <!-- Asynchronous Google Analytics snippet. Change UA-XXXXX-X to be your site's ID. -->
-<script>
-  var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
-  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-  s.parentNode.insertBefore(g,s)}(document,'script'));
-</script>
+<script>//
+//  var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+//  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+//  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+//  s.parentNode.insertBefore(g,s)}(document,'script'));
+//</script>
 </body>
 </html>
