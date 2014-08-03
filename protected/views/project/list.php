@@ -1,3 +1,12 @@
+<?php 
+/* @var $this SiteController */
+
+$this->pageTitle=Yii::app()->name . ' - Portfolio';
+$this->breadcrumbs=array(
+	'Portfolio',
+);
+?>
+
 <h1><?php echo Yii::app()->name ?> Portfolio</h1>
 
 <p>Welcome to the most interesting website in the world. </p>

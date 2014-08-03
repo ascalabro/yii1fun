@@ -46,7 +46,7 @@
 					'items'=>array(
 						array('label'=>'Home', 'url'=>array('/site/index')),
 						array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
-                                                array('label'=>'Portfolio','url'=>array('site/page','view'=>'portfolio')),
+                                                array('label'=>'Portfolio','url'=>array('/project/index')),
 						array('label'=>'Contact', 'url'=>array('/site/contact')),
 						array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
 						array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
@@ -67,11 +67,11 @@
 			<a href="#" class="arrow fright">see more infos</a>
 		</header>
 		
-		<div class="grid col-one-half mq2-col-full">
+		<div class="grid col-two-thirds mq2-col-full">
 			<?php echo $content; ?>
 		</div>
 	
-		 <div class="slider grid col-one-half mq2-col-full">
+<!--		 <div class="slider grid col-one-half mq2-col-full">
 		   <div class="flexslider">
 		     <div class="slides">
 		       <div class="slide">
@@ -99,7 +99,7 @@
 		               </div>
 		            </div>
 		   </div>
-		 </div>
+		 </div>-->
 		
 		 </section>
 	
