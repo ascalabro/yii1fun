@@ -10,13 +10,14 @@
 	<meta charset="UTF-8">
 	
 	<!-- Remove this line if you use the .htaccess -->
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">-->
 
 	<meta name="viewport" content="width=device-width">
 	
-	<meta name="description" content="Designa Studio, a HTML5 / CSS3 template.">
-	<meta name="author" content="Sylvain Lafitte, Web Designer, sylvainlafitte.com">
-	
+	<meta name="description" content="SouthEast.Club Studios">
+	<meta name="keywords" content="angelo, scalabroni, html, php, mysql, mongodb, programming, tampa, florida, tutorials, projects, ajax, southeast, club, southeastern, program">
+        <meta name="google-site-verification" content="X9fp0YQ8LFnnArYYk6GFi4GZYAfXKH43XVmay1SE2ts" />
+        
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 	
 	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
