@@ -17,7 +17,7 @@
 	<meta name="description" content="SouthEast.Club Studios">
 	<meta name="keywords" content="angelo, scalabroni, html, php, mysql, mongodb, programming, tampa, florida, tutorials, projects, ajax, southeast, club, southeastern, program">
         <meta name="google-site-verification" content="X9fp0YQ8LFnnArYYk6GFi4GZYAfXKH43XVmay1SE2ts" />
-        
+
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 	
 	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
