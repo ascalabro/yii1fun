@@ -4,8 +4,5 @@
 /nbproject/
 /assets/*
 /protected/runtime/
-/protected/extensions/booster/assets/*
-/protected/extensions/booster/userdoc/*
-/protected/extensions/bootstrap/assets/*
 .htaccess
 PracticeController.php
