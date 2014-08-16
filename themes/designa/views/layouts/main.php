@@ -66,7 +66,7 @@
 						array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
                                                 array('label'=>'Portfolio','url'=>array('/project/index')),
 						array('label'=>'Contact', 'url'=>array('/site/contact')),
-                                                array('label'=>'Account', 'url'=>array('/userProfile/view&id=' . Yii::app()->user->id)),
+                                                array('label'=>'Account', 'url'=>array('/userProfile/view/id/' . Yii::app()->user->id)),
 						array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
 						array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 					),
