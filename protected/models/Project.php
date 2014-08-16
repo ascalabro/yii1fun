@@ -11,6 +11,7 @@
  * @property string $projectCreationDate
  * @property string $projectLink
  * @property string $dateAdded
+ * @property integer $ownerID
  */
 class Project extends CActiveRecord
 {
@@ -45,7 +46,7 @@ class Project extends CActiveRecord
 			array('projectDescription, projectLink', 'length', 'max'=>256),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, projectName, projectDescription, projectCategory, projectCreationDate, projectLink, dateAdded', 'safe', 'on'=>'search'),
+			array('id, projectName, projectDescription, projectCategory, projectCreationDate, projectLink, dateAdded, ownerID', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -57,6 +58,7 @@ class Project extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+                    'user' => array(self::BELONGS_TO, 'User', 'ownerID'),
 		);
 	}
 
@@ -73,6 +75,7 @@ class Project extends CActiveRecord
 			'projectCreationDate' => 'Project Creation Date',
 			'projectLink' => 'Project Link',
 			'dateAdded' => 'Date Added',
+                        'ownerID' => 'Owner ID'
 		);
 	}
 
@@ -94,6 +97,7 @@ class Project extends CActiveRecord
 		$criteria->compare('projectCreationDate',$this->projectCreationDate,true);
 		$criteria->compare('projectLink',$this->projectLink,true);
 		$criteria->compare('dateAdded',$this->dateAdded,true);
+                $criteria->compare('OwnerID',$this->ownerID,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

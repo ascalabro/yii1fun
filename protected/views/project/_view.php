@@ -32,6 +32,10 @@
 	<b><?php echo CHtml::encode($data->getAttributeLabel('dateAdded')); ?>:</b>
 	<?php echo CHtml::encode($data->dateAdded); ?>
 	<br />
+        
+        <b><?php echo CHtml::encode($data->getAttributeLabel('ownerID')); ?>:</b>
+	<?php echo CHtml::encode($data->ownerID); ?>
+	<br />
 
 
 </div>

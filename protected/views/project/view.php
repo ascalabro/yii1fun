@@ -29,5 +29,6 @@ $this->menu=array(
 		'projectCreationDate',
 		'projectLink',
 		'dateAdded',
+                'ownerID'
 	),
 )); ?>

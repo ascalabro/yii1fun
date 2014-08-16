@@ -53,6 +53,7 @@ class User extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
                     'profile' => array(self::HAS_ONE, 'UserProfile', 'UserID'),
+                    'projects' => array(self::HAS_MANY, 'Project', 'ownerID'),
 		);
 	}
 
