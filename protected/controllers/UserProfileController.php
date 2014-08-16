@@ -95,7 +95,7 @@ class UserProfileController extends Controller
 		{
 			$model->attributes=$_POST['UserProfile'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->ProfileID));
+				$this->redirect(array('view','id'=>$model->user->id));
 		}
 
 		$this->render('update',array(
@@ -152,7 +152,7 @@ class UserProfileController extends Controller
 	 */
 	public function loadModel($id)
 	{
-		$model=UserProfile::model()->findByPk($id);
+		$model=UserProfile::model()->findByPk($id); // PK is UserID
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;

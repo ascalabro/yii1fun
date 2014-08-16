@@ -5,10 +5,6 @@
 
 <div class="view">
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('ProfileID')); ?>:</b>
-	<?php echo CHtml::link(CHtml::encode($data->ProfileID), array('view', 'id'=>$data->ProfileID)); ?>
-	<br />
-
 	<b><?php echo CHtml::encode($data->getAttributeLabel('UserID')); ?>:</b>
 	<?php echo CHtml::encode($data->UserID); ?>
 	<br />

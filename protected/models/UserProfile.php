@@ -4,7 +4,6 @@
  * This is the model class for table "UserProfile".
  *
  * The followings are the available columns in table 'UserProfile':
- * @property integer $ProfileID
  * @property integer $UserID
  * @property string $FirstName
  * @property string $LastName
@@ -46,7 +45,7 @@ class UserProfile extends CActiveRecord
 			array('FirstName, LastName, Email', 'length', 'max'=>256),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('ProfileID, UserID, FirstName, LastName, Email', 'safe', 'on'=>'search'),
+			array('UserID, FirstName, LastName, Email', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -68,7 +67,6 @@ class UserProfile extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'ProfileID' => 'Profile',
 			'UserID' => 'User',
 			'FirstName' => 'First Name',
 			'LastName' => 'Last Name',
@@ -87,7 +85,6 @@ class UserProfile extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('ProfileID',$this->ProfileID);
 		$criteria->compare('UserID',$this->UserID);
 		$criteria->compare('FirstName',$this->FirstName,true);
 		$criteria->compare('LastName',$this->LastName,true);
