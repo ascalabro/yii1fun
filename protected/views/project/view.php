@@ -7,7 +7,20 @@ $this->breadcrumbs=array(
 	'Projects'=>array('index'),
 	$model->id,
 );
-
+//echo Yii::getPathOfAlias('booster') ;
+//$this->widget(
+//    'booster.widgets.TbButton',
+//    array(
+//        'label' => 'Top popover',
+//        'context' => 'primary',
+//        'htmlOptions' => array(
+//            'data-title' => 'A Title',
+//            'data-placement' => 'top',
+//            'data-content' => "And here's some amazing content. It's very engaging. right?",
+//            'data-toggle' => 'popover'
+//        ),
+//    )
+//);
 $this->menu=array(
 	array('label'=>'List Project', 'url'=>array('index')),
 	array('label'=>'Create Project', 'url'=>array('create')),

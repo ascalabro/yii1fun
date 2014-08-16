@@ -1,0 +1,8 @@
+#page {
+    padding-top: 60px;
+}
+
+.breadcrumb>li+li:before {
+    content: '' !important;
+    padding: 0 !important;
+}
