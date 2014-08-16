@@ -7,7 +7,6 @@
  * @property integer $id
  * @property string $username
  * @property string $password
- * @property string $email
  */
 class User extends CActiveRecord
 {
@@ -37,11 +36,11 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('username, password, email', 'required'),
-			array('username, password, email', 'length', 'max'=>64),
+			array('username, password', 'required'),
+			array('username, password', 'length', 'max'=>64),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, username, password, email', 'safe', 'on'=>'search'),
+			array('id, username, password', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -53,6 +52,7 @@ class User extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+                    'profile' => array(self::HAS_ONE, 'UserProfile', 'UserID'),
 		);
 	}
 
@@ -65,7 +65,6 @@ class User extends CActiveRecord
 			'id' => 'ID',
 			'username' => 'Username',
 			'password' => 'Password',
-			'email' => 'Email',
 		);
 	}
 
@@ -83,10 +82,14 @@ class User extends CActiveRecord
 		$criteria->compare('id',$this->id);
 		$criteria->compare('username',$this->username,true);
 		$criteria->compare('password',$this->password,true);
-		$criteria->compare('email',$this->email,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
 	}
+        
+        public function beforeValidate() {
+            $this->password = crypt($this->password, Yii::app()->params['salt']);
+            parent::beforeValidate();
+        }
 }

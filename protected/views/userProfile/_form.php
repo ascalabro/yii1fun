@@ -15,11 +15,7 @@
 
 	<?php echo $form->errorSummary($model); ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'UserID'); ?>
-		<?php echo $form->textField($model,'UserID'); ?>
-		<?php echo $form->error($model,'UserID'); ?>
-	</div>
+		<?php echo $form->hiddenField($model,'UserID'); ?>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'FirstName'); ?>

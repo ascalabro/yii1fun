@@ -3,13 +3,13 @@
 /* @var $dataProvider CActiveDataProvider */
 
 $this->breadcrumbs=array(
-	'User Profiles',
+	'User Profile',
 );
 
-$this->menu=array(
-	array('label'=>'Create UserProfile', 'url'=>array('create')),
-	array('label'=>'Manage UserProfile', 'url'=>array('admin')),
-);
+//$this->menu=array(
+//	array('label'=>'Create UserProfile', 'url'=>array('create')),
+//	array('label'=>'Manage UserProfile', 'url'=>array('admin')),
+//);
 ?>
 
 <h1>User Profiles</h1>
