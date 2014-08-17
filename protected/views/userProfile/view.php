@@ -2,6 +2,20 @@
 /* @var $this UserProfileController */
 /* @var $model UserProfile */
 
+Yii::app()->clientScript->registerCss('userProfileview1', "
+
+th {
+text-decoration: underline;
+padding: 12px;
+}
+
+td {
+padding: 12px;
+}
+
+");
+
+
 $this->breadcrumbs = array(
     $model->user->username,
 );
@@ -30,6 +44,14 @@ $this->widget('bootstrap.widgets.TbDetailView', array(
     ),
 ));
 if ($repos != null) {
+    Yii::app()->clientScript->registerCss('userProfileview2', "
+
+        #yw1 {
+            width:1100px;
+            margin: 20px 0 20px;
+        }
+        
+        ");
     $this->widget('zii.widgets.jui.CJuiAccordion', array(
         'panels' => array(
             'Github' => $this->renderPartial('_repos', array('repos' => $repos), true),
