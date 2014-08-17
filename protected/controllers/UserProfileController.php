@@ -51,9 +51,18 @@ class UserProfileController extends Controller
 	 */
 	public function actionView($id)
 	{
-		$this->render('view',array(
-			'model'=>$this->loadModel($id),
+            $model = $this->loadModel($id);
+            $ghClient = new GitHubClient($model->user->githubaccount);
+            try {
+                $repos = $ghClient->getRepoList();
+            } catch (Exception $exc) {
+                CVarDumper::dump($exc);
+            }
+                $this->render('view',array(
+			'model'=>$model,
+                        'repos'=>$repos
 		));
+		
 	}
 
 	/**

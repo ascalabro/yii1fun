@@ -1,19 +1,22 @@
 <?php
 
 /**
- * This is the model class for table "User".
+ * This is the model class for table "GitHubAccount".
  *
- * The followings are the available columns in table 'User':
- * @property integer $id
- * @property string $username
- * @property string $password
+ * The followings are the available columns in table 'GitHubAccount':
+ * @property string $GitHubUsername
+ * @property string $GitHubPassword
+ * @property integer $GitHubOwnerID
+ *
+ * The followings are the available model relations:
+ * @property User $gitHubOwner
  */
-class User extends CActiveRecord
+class GitHubAccount extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
-	 * @return User the static model class
+	 * @return GitHubAccount the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -25,7 +28,7 @@ class User extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'User';
+		return 'GitHubAccount';
 	}
 
 	/**
@@ -36,11 +39,12 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('username, password', 'required'),
-			array('username, password', 'length', 'max'=>64),
+			array('GitHubUsername, GitHubPassword', 'required'),
+			array('GitHubOwnerID', 'numerical', 'integerOnly'=>true),
+			array('GitHubUsername, GitHubPassword', 'length', 'max'=>256),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, username, password', 'safe', 'on'=>'search'),
+			array('GitHubUsername, GitHubPassword, GitHubOwnerID', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -52,9 +56,7 @@ class User extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-                    'githubaccount' => array(self::HAS_ONE, 'GitHubAccount', 'GitHubOwnerID'),
-                    'profile' => array(self::HAS_ONE, 'UserProfile', 'UserID'),
-                    'projects' => array(self::HAS_MANY, 'Project', 'ownerID'),
+			'gitHubOwner' => array(self::BELONGS_TO, 'User', 'GitHubOwnerID'),
 		);
 	}
 
@@ -64,9 +66,9 @@ class User extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
-			'username' => 'Username',
-			'password' => 'Password',
+			'GitHubUsername' => 'Git Hub Username',
+			'GitHubPassword' => 'Git Hub Password',
+			'GitHubOwnerID' => 'Git Hub Owner',
 		);
 	}
 
@@ -81,17 +83,12 @@ class User extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
-		$criteria->compare('username',$this->username,true);
-		$criteria->compare('password',$this->password,true);
+		$criteria->compare('GitHubUsername',$this->GitHubUsername,true);
+		$criteria->compare('GitHubPassword',$this->GitHubPassword,true);
+		$criteria->compare('GitHubOwnerID',$this->GitHubOwnerID);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
 	}
-        
-        public function beforeValidate() {
-            $this->password = crypt($this->password, Yii::app()->params['salt']);
-            parent::beforeValidate();
-        }
 }

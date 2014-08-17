@@ -19,12 +19,16 @@ $this->menu=array(
 ?>
 
 <h1><?php echo $model->user->username; ?>'s Profile</h1>
-
+<?php CVarDumper::dump($repos,'20',true); ?>
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
 		'FirstName',
 		'LastName',
 		'Email',
+                array(
+                    'label'=>'GitHub Username',
+                    'value'=>$model->user->githubaccount->GitHubUsername
+                ),
 	),
 )); ?>
