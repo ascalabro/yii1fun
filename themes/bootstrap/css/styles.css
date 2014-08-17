@@ -6,3 +6,15 @@
     content: '' !important;
     padding: 0 !important;
 }
+
+#footer {
+    margin-top: 14px;
+}
+
+#content {
+    min-height: 600px;
+}
+
+th {
+text-decoration: underline;
+}
