@@ -52,6 +52,7 @@ class User extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+                    'githubaccount' => array(self::HAS_ONE, 'GitHubAccount', 'GitHubOwnerID'),
                     'profile' => array(self::HAS_ONE, 'UserProfile', 'UserID'),
                     'projects' => array(self::HAS_MANY, 'Project', 'ownerID'),
 		);
