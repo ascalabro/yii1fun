@@ -4,8 +4,8 @@
 }
 
 body {
-    background: url('glasspattern.jpg');
-    background-size: 100% auto;
+    background: url('glasspattern.jpg') fixed  ;
+    background-size: 100% 100%;
 }
 
 .breadcrumb>li+li:before {
@@ -15,12 +15,10 @@ body {
 
 #footer {
     margin-top: 14px;
+    background-color: rgb(222, 235, 241);
 }
 
 #content {
     min-height: 600px;
 }
 
-th {
-text-decoration: underline;
-}
