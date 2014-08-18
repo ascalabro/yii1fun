@@ -898,6 +898,9 @@
 }
 
 @media (max-width: 480px) {
+  .hero-unit h1 {
+    font-size: 45px;
+  }
   .nav-collapse {
     -webkit-transform: translate3d(0, 0, 0);
   }
