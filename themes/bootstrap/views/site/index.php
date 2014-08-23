@@ -3,10 +3,41 @@
 Yii::app()->clientScript->registerCss('cssa', "
 
 .hero-unit {
-background-color: rgba(238, 238, 238, 0.22);
+background-color: rgba(238, 238, 238, 0.1);
 margin-bottom: 0;
 }
+
+.thumbnail {
+background-color:rgba(163, 251, 226, 0.39);
+}
+
+.thumbnail:hover {
+background-color:rgba(163,251,225,0.2);
+}
 ");
+
+Yii::app()->clientScript->registerScript('chover', '
+/*
+$(".thumbnail").hover(function() {
+    $(this).find(".lh").css("font-size","130%");
+},
+function() {
+    $(this).find(".lh").css("font-size","100%");
+}
+);
+*/
+$(document).ready(function() {
+    $(".thumbnail").each(function(index) {
+        var captionImage = $(this).find("td:first font").html();
+        var boldTitle = $(this).find(".lh font:first").text();
+        var articleLink = $(this).find(".lh a:first").attr(\'href\');
+        if (captionImage == ""){
+            $(this).find("td:first").html("<a href=\'" + articleLink + "\'><img src=\'' . Yii::app()->getBaseUrl() . '/images/businessgeneric.jpg' . '\'><br><font size=\'-2\'>" + boldTitle + "</font></a>");
+        }
+    });
+});
+
+');
 
 $this->pageTitle=Yii::app()->name;
 

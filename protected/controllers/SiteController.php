@@ -28,7 +28,7 @@ class SiteController extends Controller {
      */
     public function actionIndex() {
         $this->layout = '//layouts/main';
-        $feedxml = simplexml_load_file("https://news.google.com/news/feeds?q=southeast&output=rss");
+        $feedxml = simplexml_load_file("https://news.google.com/news/feeds?output=rss&q=" . Yii::app()->params['newsKeywords']);
         $this->render('index',array('data'=>$feedxml));
     }
 
