@@ -28,6 +28,16 @@
             })();
 
         </script>
+        <script type="text/javascript">
+        $(document).ready(function(){
+           //apply to each submenu item so that the 'url' property is correct.
+           $(".dropdown-submenu").each(function() {
+               var fully = $(this).find('li:first a').attr('href');
+               var newStr = fully.substr(0,fully.lastIndexOf('/')+1);
+               $(this).find('a:first').attr('href',newStr).val(newStr);
+           }); 
+        });
+        </script>
         <meta name="google-site-verification" content="X9fp0YQ8LFnnArYYk6GFi4GZYAfXKH43XVmay1SE2ts" />
 
     </head>
@@ -39,14 +49,28 @@
             'items' => array(
                 array(
                     'class' => 'bootstrap.widgets.TbMenu',
+                    'submenuHtmlOptions' => array('class' => 'multi-level'),
                     'items' => array(
                         array('label' => 'Home', 'url' => array('/site/index')),
                         array('label' => 'About', 'url' => array('/site/page', 'view' => 'about')),
 //                        array('label' => 'Contact', 'url' => array('/site/contact')),
-                       // array('label' => 'Portfolio', 'url' => array('/project/index'), 'visible' => !Yii::app()->user->isGuest),
+                        // array('label' => 'Portfolio', 'url' => array('/project/index'), 'visible' => !Yii::app()->user->isGuest),
                         array('label' => 'Profile', 'url' => array('/userProfile/view/id/' . Yii::app()->user->id), 'visible' => !Yii::app()->user->isGuest),
+                        array('label' => 'Tools', 'items' => array(
+                                '...',
+                                array('label' => 'All', 'url' => array('/Tools/categories/index')),
+                                array('label' => 'Poker', 'url' => array('/Tools/Poker'),
+                                    'items'=> array(
+                                        array('label'=>'Statking Import', 'url' => array('/Tools/Poker/statkingImport'))
+                                    )
+                                ),
+                                array('label'=>'Poker',  'url' => Yii::app()->getBaseUrl(true) . '/index.php/Tools/Poker'
+                                    ),
+                            ),
+                            'visible'=>!Yii::app()->user->isGuest
+                        ),
                         array('label' => 'Login', 'url' => array('/site/login'), 'visible' => Yii::app()->user->isGuest),
-                        array('label' => 'Logout (' . Yii::app()->user->name . ')', 'url' => array('/site/logout'), 'visible' => !Yii::app()->user->isGuest)
+                        array('label' => 'Logout (' . Yii::app()->user->name . ')', 'url' => array('/site/logout'), 'visible' => !Yii::app()->user->isGuest),
                     ),
                 ),
             ),
@@ -61,9 +85,9 @@
                     'links' => $this->breadcrumbs,
                 ));
                 ?><!-- breadcrumbs -->
-<?php endif ?>
+            <?php endif ?>
 
-<?php echo $content; ?>
+            <?php echo $content; ?>
 
             <div class="clear"></div>
 

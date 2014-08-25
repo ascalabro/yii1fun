@@ -43,7 +43,7 @@ $this->pageTitle=Yii::app()->name;
 
 ?>
 
-<?php $this->beginWidget('bootstrap.widgets.TbHeroUnit',array(
+<?php $this->beginWidget('booster.widgets.TbJumbotron',array(
     'heading'=>'Welcome to '.CHtml::encode(Yii::app()->name),
 )); ?>
 
@@ -57,7 +57,7 @@ $this->pageTitle=Yii::app()->name;
     ),
 )); ?>
 
-<h3>Southeastern News</h3>
+<!--<h3>Southeastern News</h3>-->
 <?php // CVarDumper::dump($data,'20',true); ?>
 <div class="row-fluid">
     <ul class="thumbnails">

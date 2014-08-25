@@ -265,7 +265,7 @@ a:focus {
 
 .row {
   background-color: rgba(251, 251, 251, 0.47);
-  margin-left: -20px;
+  /*margin-left: -20px;*/
   *zoom: 1;
 }
 
