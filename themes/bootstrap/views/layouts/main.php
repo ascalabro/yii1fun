@@ -33,8 +33,54 @@
     </head>
 
     <body>
-
         <?php
+Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/javascript/soundManagerMp3Player.js');
+
+Yii::app()->clientScript->registerScript('mp3ini','
+
+function launchSoundManagerMp3Player() {
+
+$.get(' . CJavaScript::encode($this->createUrl('site/loadMp3Playlist')) . ', function(playlist) {
+    var playlist = jQuery.parseJSON(playlist);
+    for (var i in playlist) { 
+        console.log(playlist[i]);
+    }
+});
+//$("#mp3dialog").dialog("open");
+return false;
+}
+',CClientScript::POS_HEAD);
+$this->beginWidget('zii.widgets.jui.CJuiDialog', array(
+    'id'=>'mp3dialog',
+    // additional javascript options for the dialog plugin
+    'options'=>array(
+        'title'=>'Mp3 Player',
+        'autoOpen'=>false,
+        'modal'=>true,      
+    ),
+
+));
+
+
+?>
+<p><a href="/mp3/file1.mp3" id="singlePlayer_1" class="list1">Audio 1</a></p>
+<p><a href="/mp3/file2.mp3" id="singlePlayer_2" class="list1">Audio 2</a></p>
+<p><a href="/mp3/file3.mp3" id="singlePlayer_3" class="list1">Audio 3</a></p>
+<p><a href="/mp3/file4.mp3" id="singlePlayer_4" class="list1">Audio 4</a></p>
+<?php $this->widget("ext.SoundManager.ESoundManagerSimplePlayList", 
+        array("playListId" => "playList1", 
+              "playListClass" => "list1", 
+              "autoPlay" => true, 
+              "autoNext" => true, 
+              "playCallback" => "onPlay", 
+              "stopCallback" => "onStop", 
+              "pauseCallback" => "onPause", 
+              "resumeCallback" => "onResume", 
+              "finishCallback" => "onFinish"));
+
+$this->endWidget('zii.widgets.jui.CJuiDialog');
+
+
         $this->widget('bootstrap.widgets.TbNavbar', array(
             'items' => array(
                 array(
@@ -43,8 +89,9 @@
                         array('label' => 'Home', 'url' => array('/site/index')),
                         array('label' => 'About', 'url' => array('/site/page', 'view' => 'about')),
 //                        array('label' => 'Contact', 'url' => array('/site/contact')),
-                       // array('label' => 'Portfolio', 'url' => array('/project/index'), 'visible' => !Yii::app()->user->isGuest),
+                        // array('label' => 'Portfolio', 'url' => array('/project/index'), 'visible' => !Yii::app()->user->isGuest),
                         array('label' => 'Profile', 'url' => array('/userProfile/view/id/' . Yii::app()->user->id), 'visible' => !Yii::app()->user->isGuest),
+                        array('label' => 'Mp3 Player', 'url' => '#', 'itemOptions' => array('onclick' => 'js: launchSoundManagerMp3Player()'), 'visible' => Yii::app()->user->name == 'ascalabro'),
                         array('label' => 'Login', 'url' => array('/site/login'), 'visible' => Yii::app()->user->isGuest),
                         array('label' => 'Logout (' . Yii::app()->user->name . ')', 'url' => array('/site/logout'), 'visible' => !Yii::app()->user->isGuest)
                     ),
@@ -61,9 +108,9 @@
                     'links' => $this->breadcrumbs,
                 ));
                 ?><!-- breadcrumbs -->
-<?php endif ?>
+            <?php endif ?>
 
-<?php echo $content; ?>
+            <?php echo $content; ?>
 
             <div class="clear"></div>
 
