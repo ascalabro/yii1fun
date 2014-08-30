@@ -37,19 +37,24 @@
 Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/javascript/soundManagerMp3Player.js');
 
 Yii::app()->clientScript->registerScript('mp3ini','
-
+(function($) {
+  
+})(jQuery);
 function launchSoundManagerMp3Player() {
-
 $.get(' . CJavaScript::encode($this->createUrl('site/loadMp3Playlist')) . ', function(playlist) {
     var playlist = jQuery.parseJSON(playlist);
     for (var i in playlist) { 
+        $("#mp3dialog").append("<p> <a href=\'/mp3/" + playlist[i] + "\' id=\'singlePlayer_" + i + "\' class=\'list1\'>" + playlist[i] + "</a></p>");
         console.log(playlist[i]);
     }
 });
-//$("#mp3dialog").dialog("open");
+
+$("#mp3dialog").dialog("open");
 return false;
 }
 ',CClientScript::POS_HEAD);
+
+
 $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
     'id'=>'mp3dialog',
     // additional javascript options for the dialog plugin
@@ -63,14 +68,14 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
 
 
 ?>
-<p><a href="/mp3/file1.mp3" id="singlePlayer_1" class="list1">Audio 1</a></p>
+<!--<p><a href="/mp3/file1.mp3" id="singlePlayer_1" class="list1">Audio 1</a></p>
 <p><a href="/mp3/file2.mp3" id="singlePlayer_2" class="list1">Audio 2</a></p>
 <p><a href="/mp3/file3.mp3" id="singlePlayer_3" class="list1">Audio 3</a></p>
-<p><a href="/mp3/file4.mp3" id="singlePlayer_4" class="list1">Audio 4</a></p>
+<p><a href="/mp3/file4.mp3" id="singlePlayer_4" class="list1">Audio 4</a></p>-->
 <?php $this->widget("ext.SoundManager.ESoundManagerSimplePlayList", 
         array("playListId" => "playList1", 
               "playListClass" => "list1", 
-              "autoPlay" => true, 
+              "autoPlay" => false, 
               "autoNext" => true, 
               "playCallback" => "onPlay", 
               "stopCallback" => "onStop", 
