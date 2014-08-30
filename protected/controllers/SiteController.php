@@ -105,8 +105,16 @@ class SiteController extends Controller {
     
     public function actionLoadMp3Playlist() {
         $files = CFileHelper::findFiles(Yii::app()->params['mp3filespath']);
+        shuffle($files);
         foreach ($files as &$file) {
-            $file = basename($file);
+            $pathParts = explode("/", $file);
+            if (count($pathParts) == 7) {
+                $file = $pathParts[5] . '/' . basename($file);
+            } elseif (count($pathParts) == 8) {
+                $file = $pathParts[5] . '/' . $pathParts[6] . '/' . basename($file);
+            } else {
+                $file = basename($file);
+            }
         }
         echo json_encode($files);
     }
