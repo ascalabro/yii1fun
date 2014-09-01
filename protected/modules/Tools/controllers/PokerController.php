@@ -38,7 +38,9 @@ class PokerController extends Controller {
     }
 
     public function actionStatkingDatabase() {
-        
+        $this->setPageTitle("Statking Database View");
+        $this->render('statking', array(
+        ));
     }
-
+    
 }

@@ -61,7 +61,7 @@
                                 array('label' => 'All', 'url' => array('/Tools/categories/index')),
                                 array('label' => 'Poker', 'url' => array('/Tools/Poker'),
                                     'items'=> array(
-                                        array('label'=>'Statking Import', 'url' => array('/Tools/Poker/statkingImport'))
+                                        array('label'=>'Statking', 'url' => array('/Tools/Poker/statkingdatabase'))
                                     )
                                 ),
                                 array('label'=>'Poker',  'url' => Yii::app()->getBaseUrl(true) . '/index.php/Tools/Poker'
