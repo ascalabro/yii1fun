@@ -104,7 +104,7 @@ class SiteController extends Controller {
     }
     
     public function actionLoadMp3Playlist() {
-        $files = CFileHelper::findFiles(Yii::app()->params['mp3filespath']);
+        $files = CFileHelper::findFiles(Yii::app()->params['mp3filespath'] . '/' . Yii::app()->user->name);
         shuffle($files);
         foreach ($files as &$file) {
             $pathParts = explode("/", $file);
