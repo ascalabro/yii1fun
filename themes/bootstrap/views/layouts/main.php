@@ -43,8 +43,58 @@
     </head>
 
     <body>
-
         <?php
+        Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/javascript/soundManagerMp3Player.js');
+
+        Yii::app()->clientScript->registerScript('mp3ini', '
+function launchSoundManagerMp3Player() {
+if (soundManager.loadedPlaylist != true) {
+    $.get(' . CJavaScript::encode(Yii::app()->baseUrl . '/index.php/site/loadMp3Playlist') . ', function(playlist) {
+    soundManager.loadedPlaylist = true;
+    var playlist = jQuery.parseJSON(playlist);
+    for (var i in playlist) { 
+        $("#mp3dialog").append("<p> <a href=\'/mp3/" + playlist[i] + "\' id=\'singlePlayer_" + parseInt(i+1) + "\' class=\'list1\'>" + playlist[i] + "</a></p>");
+        console.log(playlist[i]);
+    }
+    });
+}
+$("#mp3dialog").dialog("open");
+return false;
+}
+', CClientScript::POS_HEAD);
+
+
+        $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
+            'id' => 'mp3dialog',
+            // additional javascript options for the dialog plugin
+            'options' => array(
+                'title' => 'Mp3 Player',
+                'autoOpen' => false,
+                'modal' => false,
+                'width' => '98%'
+            ),
+        ));
+
+
+?>
+<!--<p><a href="/mp3/willfreestyle10-15-11 (2).mp3" id="singlePlayer_1" class="list1">Audio 1</a></p>
+<p><a href="/mp3/05 With Closed Eyes [prod. A Dot] (Grey).mp3" id="singlePlayer_2" class="list1">Audio 2</a></p>
+<p><a href="/mp3/file3.mp3" id="singlePlayer_3" class="list1">Audio 3</a></p>
+<p><a href="/mp3/file4.mp3" id="singlePlayer_4" class="list1">Audio 4</a></p>-->
+<?php $this->widget("ext.SoundManager.ESoundManagerSimplePlayList", 
+        array("playListId" => "playList1", 
+            "playListClass" => "list1",
+            "autoPlay" => true,
+            "autoNext" => true,
+            "playCallback" => "onPlay",
+            "stopCallback" => "onStop",
+            "pauseCallback" => "onPause",
+            "resumeCallback" => "onResume",
+            "finishCallback" => "onFinish")
+			);
+
+        $this->endWidget('zii.widgets.jui.CJuiDialog');
+
         $this->widget('bootstrap.widgets.TbNavbar', array(
             'items' => array(
                 array(
@@ -56,6 +106,7 @@
 //                        array('label' => 'Contact', 'url' => array('/site/contact')),
                         // array('label' => 'Portfolio', 'url' => array('/project/index'), 'visible' => !Yii::app()->user->isGuest),
                         array('label' => 'Profile', 'url' => array('/userProfile/view/id/' . Yii::app()->user->id), 'visible' => !Yii::app()->user->isGuest),
+						array('label' => 'Mp3 Player', 'url' => '#', 'itemOptions' => array('onclick' => 'js: launchSoundManagerMp3Player()'), 'visible' => Yii::app()->user->name == 'ascalabro'),
                         array('label' => 'Tools', 'items' => array(
                                 '...',
                                 array('label' => 'All', 'url' => array('/Tools/categories/index')),
@@ -79,7 +130,7 @@
 
         <div class="container" id="page">
 
-            <?php if (isset($this->breadcrumbs)): ?>
+<?php if (isset($this->breadcrumbs)): ?>
                 <?php
                 $this->widget('bootstrap.widgets.TbBreadcrumbs', array(
                     'links' => $this->breadcrumbs,
@@ -92,7 +143,7 @@
             <div class="clear"></div>
 
             <div id="footer">
-                Copyright &copy; <?php echo date('Y'); ?> .<br/>
+                Copyright &copy; <?php echo date('Y'); ?><br/>
                 All Rights Reserved.<br/>
             </div><!-- footer -->
 

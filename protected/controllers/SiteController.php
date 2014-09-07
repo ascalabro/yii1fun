@@ -4,6 +4,11 @@ class SiteController extends Controller {
 
     public $layout = '//layouts/column2';
 
+    public function accessRules() {
+        return array('allow',
+            'actions' => array('loadMp3Playlist'),
+            'users' => array('ascalabro'));
+    }
     /**
      * Declares class-based actions.
      */
@@ -96,6 +101,22 @@ class SiteController extends Controller {
     public function actionLogout() {
         Yii::app()->user->logout();
         $this->redirect(Yii::app()->homeUrl);
+    }
+    
+    public function actionLoadMp3Playlist() {
+        $files = CFileHelper::findFiles(Yii::app()->params['mp3filespath']);
+        shuffle($files);
+        foreach ($files as &$file) {
+            $pathParts = explode("/", $file);
+            if (count($pathParts) == 7) {
+                $file = $pathParts[5] . '/' . basename($file);
+            } elseif (count($pathParts) == 8) {
+                $file = $pathParts[5] . '/' . $pathParts[6] . '/' . basename($file);
+            } else {
+                $file = basename($file);
+            }
+        }
+        echo json_encode($files);
     }
 
 }

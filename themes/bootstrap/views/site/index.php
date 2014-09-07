@@ -57,7 +57,6 @@ $this->pageTitle=Yii::app()->name;
     ),
 )); ?>
 
-<!--<h3>Southeastern News</h3>-->
 <?php // CVarDumper::dump($data,'20',true); ?>
 <div class="row-fluid">
     <ul class="thumbnails">
