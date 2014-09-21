@@ -1,86 +1,58 @@
+<?php
+/* @var $this PokerController */
 
-<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/javascript/lib/Chart.js/Chart.min.js"> </script>
-
-
+$this->breadcrumbs = array(
+    $this->module->id => array('/' . $this->module->id . '/Categories'),
+    'Poker' => array('/' . $this->module->id . '/' . $this->id),
+    $this->pageTitle
+);
+?>
 <div class="row">
-<canvas id="myChart" width="800" height="400"></canvas>	
+    <?php
+    $this->widget(
+            'chartjs.widgets.ChLine', 
+            array(
+                'width' => 950,
+                'height' => 700,
+                'htmlOptions' => array(),
+                'labels' => $months,
+                'datasets' => array(
+                    array(
+                        "fillColor" => "rgba(220,220,220,0.5)",
+                        "strokeColor" => "rgba(220,220,220,1)",
+                        "pointColor" => "rgba(220,220,220,1)",
+                        "pointStrokeColor" => "#ffffff",
+                        "data" => $sessions,
+                        "label" => "first data set"
+                    ),
+//                    array(
+//                        "fillColor" => "rgba(220,220,220,0.5)",
+//                        "strokeColor" => "rgba(220,220,220,1)",
+//                        "pointColor" => "rgba(220,220,220,1)",
+//                        "pointStrokeColor" => "#ffffff",
+//                        "data" => array(55, 50, 45, 30, 20, 10)
+//                    )      
+                ),
+                'options' => array(
+                    "pointDot" => true,
+                    "pointDotRadius" => 2,
+                    "legendTemplate" => "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].lineColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>",
+                    "pointHitDetectionRadius" => 10,
+                    "bezierCurve" => true,
+                    "scaleOverride" => true,
+                    "scaleSteps" => $max / ($max * .015),
+                    "scaleStepWidth" =>  250/*Math.ceil(max / steps)*/,
+                    "scaleStartValue" => -1000,
+                    "tooltipTemplate" => "<%if (label){%><%=label%>\n<%}%>$<% if (value > 0){%>+<%}%><%= value %>"
+                )
+            )
+        ); 
+    ?>
 </div>
-<script>
-var options = {
-
-    ///Boolean - Whether grid lines are shown across the chart
-    scaleShowGridLines : true,
-
-    //String - Colour of the grid lines
-    scaleGridLineColor : "rgba(0,0,0,.05)",
-
-    //Number - Width of the grid lines
-    scaleGridLineWidth : 1,
-
-    //Boolean - Whether the line is curved between points
-    bezierCurve : true,
-
-    //Number - Tension of the bezier curve between points
-    bezierCurveTension : 0.4,
-
-    //Boolean - Whether to show a dot for each point
-    pointDot : true,
-
-    //Number - Radius of each point dot in pixels
-    pointDotRadius : 4,
-
-    //Number - Pixel width of point dot stroke
-    pointDotStrokeWidth : 1,
-
-    //Number - amount extra to add to the radius to cater for hit detection outside the drawn point
-    pointHitDetectionRadius : 20,
-
-    //Boolean - Whether to show a stroke for datasets
-    datasetStroke : true,
-
-    //Number - Pixel width of dataset stroke
-    datasetStrokeWidth : 2,
-
-    //Boolean - Whether to fill the dataset with a colour
-    datasetFill : true,
-
-    //String - A legend template
-    legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].lineColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
-
-};    
-    
-var data = {
-    labels: ["January", "February", "March", "April", "May", "June", "July"],
-    datasets: [
-        {
-            label: "My First dataset",
-            fillColor: "rgba(220,220,220,0.2)",
-            strokeColor: "rgba(220,220,220,1)",
-            pointColor: "rgba(220,220,220,1)",
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(220,220,220,1)",
-            data: [65, 59, 80, 81, 56, 55, 40]
-        },
-        {
-            label: "My Second dataset",
-            fillColor: "rgba(151,187,205,0.2)",
-            strokeColor: "rgba(151,187,205,1)",
-            pointColor: "rgba(151,187,205,1)",
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(151,187,205,1)",
-            data: [28, 48, 40, 19, 86, 27, 90]
-        }
-    ]
-};    
-var ctx = document.getElementById("myChart").getContext("2d");
-var myLineChart = new Chart(ctx).Line(data, options);
-
-</script>
-
-
-
-
-
-
+<div class="row">
+    <?php echo CHtml::link("Upload new .csv database", "statkingimport"); ?>
+</div>
+<?php
+Yii::app()->clientScript->registerScript('charter', "
+//$('body').append(chart.generateLegend());
+", CClientScript::POS_READY);

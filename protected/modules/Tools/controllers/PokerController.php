@@ -2,6 +2,22 @@
 
 class PokerController extends Controller {
 
+    public function accessRules() {
+        return array(
+            array('allow',
+                'actions' => array('index', 'statkingImport', 'statkingDatabase'),
+                'users' => array('@')
+            ),
+            array('deny')
+        );
+    }
+
+    public function filters() {
+        return array(
+            'accessControl',
+        );
+    }
+
     public function actionIndex() {
         $this->setPageTitle("Poker Tools");
         $this->render('index');
@@ -29,6 +45,8 @@ class PokerController extends Controller {
                     $session->comments = $row[5];
                     $session->save();
                 }
+                // redirect user to where the data will be displayed on a graph
+                $this->redirect('statkingDatabase');
             }
         }
         $this->setPageTitle("Statking Database Import");
@@ -38,9 +56,27 @@ class PokerController extends Controller {
     }
 
     public function actionStatkingDatabase() {
+        $data = StatkingSession::getAllSessionsByMonth();
+        if (empty($data)) {
+            $this->redirect("statkingimport");
+        }
+        $sessions[0] = 0;
+        $months = array();
+        $max = 0;
+        foreach ($data as $x => $session) {
+            $months[] = $session['Month'] . "/" . $session['Year'];
+            $sessions[] = $sessions[$x] + $session['Profit_Loss'];
+            if ($session['Profit_Loss'] > $max) {
+                $max = $session['Profit_Loss'];
+            }
+        }
+        $max = (int) $max * 1.5;
         $this->setPageTitle("Statking Database View");
         $this->render('statking', array(
+            "max" => $max,
+            "sessions" => $sessions,
+            "months" => $months
         ));
     }
-    
+
 }

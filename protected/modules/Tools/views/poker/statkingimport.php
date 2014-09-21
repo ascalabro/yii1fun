@@ -1,5 +1,5 @@
 <?php
-/* @var $this DefaultController */
+/* @var $this PokerController */
 
 $this->breadcrumbs = array(
     $this->module->id => array('/' . $this->module->id . '/Categories'),

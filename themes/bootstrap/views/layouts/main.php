@@ -115,8 +115,8 @@ return false;
                                         array('label'=>'Statking', 'url' => array('/Tools/Poker/statkingdatabase'))
                                     )
                                 ),
-                                array('label'=>'Poker',  'url' => Yii::app()->getBaseUrl(true) . '/index.php/Tools/Poker'
-                                    ),
+//                                array('label'=>'Poker',  'url' => Yii::app()->getBaseUrl(true) . '/index.php/Tools/Poker'
+//                                    ),
                             ),
                             'visible'=>!Yii::app()->user->isGuest
                         ),
