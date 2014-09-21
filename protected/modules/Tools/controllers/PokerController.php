@@ -5,7 +5,7 @@ class PokerController extends Controller {
     public function accessRules() {
         return array(
             array('allow',
-                'actions' => array('statkingImport', 'statkingDatabase'),
+                'actions' => array('index', 'statkingImport', 'statkingDatabase'),
                 'users' => array('@')
             ),
             array('deny')
@@ -45,6 +45,8 @@ class PokerController extends Controller {
                     $session->comments = $row[5];
                     $session->save();
                 }
+                // redirect user to where the data will be displayed on a graph
+                $this->redirect('statkingDatabase');
             }
         }
         $this->setPageTitle("Statking Database Import");
