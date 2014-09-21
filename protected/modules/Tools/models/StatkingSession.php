@@ -93,4 +93,18 @@ class StatkingSession extends CActiveRecord
 		));
 	}
         
+        public static function getAllSessionsByMonth() {
+            $command = Yii::app()->db->createCommand("
+                SELECT 
+                COUNT(id) as Count, 
+                YEAR(date) as Year, 
+                MONTH(date) as Month, 
+                ROUND(SUM(session_length), 2) as TotalHours, 
+                SUM(profit_loss) as Profit_Loss 
+                FROM  `southeastclub`.`StatkingSession`
+                WHERE user_id =  " . Yii::app()->user->id . "
+                GROUP BY EXTRACT(YEAR_MONTH FROM DATE)");
+            return $command->queryAll();
+        }
+        
 }
