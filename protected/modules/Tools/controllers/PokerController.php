@@ -64,7 +64,7 @@ class PokerController extends Controller {
         $months = array();
         $max = 0;
         foreach ($data as $x => $session) {
-            $months[] = $session['Year'] . "-" . $session['Month'];
+            $months[] = $session['Month'] . "/" . $session['Year'];
             $sessions[] = $sessions[$x] + $session['Profit_Loss'];
             if ($session['Profit_Loss'] > $max) {
                 $max = $session['Profit_Loss'];
