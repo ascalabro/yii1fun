@@ -66,8 +66,8 @@ class UserProfileController extends Controller {
         if ($model->user->githubaccount != null) {
             $ghClient = new GitHubClient($model->user->githubaccount);
             $repos = $ghClient->getRepoList();
-            echo json_encode($repos);
-        } else { 
+            echo $_GET['jsonp_callback'] . '(' . json_encode($repos) . ')';
+        } else {
             echo json_encode(array(
                 "Error: " => "No repos found for user with id " . $id
             ));
