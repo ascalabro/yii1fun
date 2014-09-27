@@ -26,7 +26,7 @@ class UserProfileController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view'),
+                'actions' => array('index', 'view','GetGitHubRepos'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -59,6 +59,19 @@ class UserProfileController extends Controller {
             'model' => $model,
             'repos' => $repos
         ));
+    }
+    
+    public function actionGetGitHubRepos($id) {
+        $model = UserProfile::model()->findByPk($id);
+        if ($model->user->githubaccount != null) {
+            $ghClient = new GitHubClient($model->user->githubaccount);
+            $repos = $ghClient->getRepoList();
+            echo json_encode($repos);
+        } else { 
+            echo json_encode(array(
+                "Error: " => "No repos found for user with id " . $id
+            ));
+        }
     }
 
     /**
