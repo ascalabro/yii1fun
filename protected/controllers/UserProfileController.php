@@ -49,7 +49,7 @@ class UserProfileController extends Controller {
      */
     public function actionView($id) {
 		$model = $this->loadModel($id);
-        $response = file_get_contents("http://vm/api/index.php?r=user/getgithubrepos&id=" . $_GET['id']);
+        $response = file_get_contents("http://api.southeast.club/index.php?r=user/getgithubrepos&id=" . $_GET['id']);
 		$repos = json_decode($response);
         $this->render('view', array(
             'model' => $model,
