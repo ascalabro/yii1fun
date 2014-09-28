@@ -48,30 +48,13 @@ class UserProfileController extends Controller {
      * @param integer $id the ID of the model to be displayed
      */
     public function actionView($id) {
-        $model = $this->loadModel($id);
-        if ($model->user->githubaccount != null) {
-            $ghClient = new GitHubClient($model->user->githubaccount);
-            $repos = $ghClient->getRepoList();
-        } else {
-            $repos = null;
-        }
+		$model = $this->loadModel($id);
+        $response = file_get_contents("http://vm/api/index.php?r=user/getgithubrepos&id=" . $_GET['id']);
+		$repos = json_decode($response);
         $this->render('view', array(
             'model' => $model,
             'repos' => $repos
         ));
-    }
-    
-    public function actionGetGitHubRepos($id) {
-        $model = UserProfile::model()->findByPk($id);
-        if ($model->user->githubaccount != null) {
-            $ghClient = new GitHubClient($model->user->githubaccount);
-            $repos = $ghClient->getRepoList();
-            echo $_GET['jsonp_callback'] . '(' . json_encode($repos) . ')';
-        } else {
-            echo json_encode(array(
-                "Error: " => "No repos found for user with id " . $id
-            ));
-        }
     }
 
     /**
@@ -182,7 +165,7 @@ class UserProfileController extends Controller {
         }
     }
 
-    public function actionAddGitHub() {
+    /*public function actionAddGitHub() {
         $model = $this->loadModel(Yii::app()->user->id);
         $gha = new GitHubAccount();
         if (Yii::app()->request->isPostRequest) {
@@ -204,6 +187,6 @@ class UserProfileController extends Controller {
                     'gha'=>$gha
             ));
         }
-    }
+    }*/
 
 }

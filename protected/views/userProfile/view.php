@@ -13,6 +13,10 @@ td {
 padding: 12px;
 }
 
+#yw1 {
+            width:1100px;
+            margin: 20px 0 20px;
+}
 ");
 
 
@@ -43,15 +47,8 @@ $this->widget('bootstrap.widgets.TbDetailView', array(
         'Email',
     ),
 ));
-if ($repos != null) {
-    Yii::app()->clientScript->registerCss('userProfileview2', "
-
-        #yw1 {
-            width:1100px;
-            margin: 20px 0 20px;
-        }
-        
-        ");
+// check if southeast.club api returned error message
+if (!property_exists($repos[0], 'error')) {
     $this->widget('zii.widgets.jui.CJuiAccordion', array(
         'panels' => array(
             'Github' => $this->renderPartial('_repos', array('repos' => $repos), true),
