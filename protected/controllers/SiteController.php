@@ -107,11 +107,13 @@ class SiteController extends Controller {
         $files = CFileHelper::findFiles(Yii::app()->params['mp3filespath'] . '/' . Yii::app()->user->name);
         shuffle($files);
         foreach ($files as &$file) {
-            $pathParts = explode("/", $file);
+                   $pathParts = explode("/", $file);
             if (count($pathParts) == 7) {
                 $file = $pathParts[5] . '/' . basename($file);
             } elseif (count($pathParts) == 8) {
                 $file = $pathParts[5] . '/' . $pathParts[6] . '/' . basename($file);
+            } elseif (count($pathParts) == 9) {
+                $file = $pathParts[5] . '/' . $pathParts[6] . '/' . $pathParts[7] . '/' . basename($file);
             } else {
                 $file = basename($file);
             }
