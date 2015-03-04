@@ -5,5 +5,5 @@
 /assets/*
 /protected/runtime/
 .htaccess
-PracticeController.php
+SandboxController.php
 /.idea/
