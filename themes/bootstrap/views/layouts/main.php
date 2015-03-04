@@ -1,4 +1,6 @@
-<?php /* @var $this Controller */ ?>
+<?php /* @var $this Controller */
+$start = microtime(true);
+?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
     <head>
@@ -35,7 +37,7 @@
                var fully = $(this).find('li:first a').attr('href');
                var newStr = fully.substr(0,fully.lastIndexOf('/')+1);
                $(this).find('a:first').attr('href',newStr).val(newStr);
-           }); 
+           });
         });
         </script>
         <meta name="google-site-verification" content="X9fp0YQ8LFnnArYYk6GFi4GZYAfXKH43XVmay1SE2ts" />
@@ -52,7 +54,7 @@ if (soundManager.loadedPlaylist != true) {
     $.get(' . CJavaScript::encode(Yii::app()->baseUrl . '/index.php/site/loadMp3Playlist') . ', function(playlist) {
     soundManager.loadedPlaylist = true;
     var playlist = jQuery.parseJSON(playlist);
-    for (var i in playlist) { 
+    for (var i in playlist) {
         $("#mp3dialog").append("<p> <a href=\'/mp3/" + playlist[i] + "\' id=\'singlePlayer_" + parseInt(i+1) + "\' class=\'list1\'>" + playlist[i] + "</a></p>");
         console.log(playlist[i]);
     }
@@ -81,8 +83,8 @@ return false;
 <p><a href="/mp3/05 With Closed Eyes [prod. A Dot] (Grey).mp3" id="singlePlayer_2" class="list1">Audio 2</a></p>
 <p><a href="/mp3/file3.mp3" id="singlePlayer_3" class="list1">Audio 3</a></p>
 <p><a href="/mp3/file4.mp3" id="singlePlayer_4" class="list1">Audio 4</a></p>-->
-<?php $this->widget("ext.SoundManager.ESoundManagerSimplePlayList", 
-        array("playListId" => "playList1", 
+<?php $this->widget("ext.SoundManager.ESoundManagerSimplePlayList",
+        array("playListId" => "playList1",
             "playListClass" => "list1",
             "autoPlay" => true,
             "autoNext" => true,
@@ -145,6 +147,12 @@ return false;
             <div id="footer">
                 Copyright &copy; <?php echo date('Y'); ?><br/>
                 All Rights Reserved.<br/>
+                Page load time: <?php echo Yii::getLogger()->getExecutionTime(); ?><br/>
+                <?php
+                $end = microtime(true);
+                printf("Page was generated in %f seconds", $end - $start);
+                ?>
+                <hr>
             </div><!-- footer -->
 
         </div><!-- page -->
