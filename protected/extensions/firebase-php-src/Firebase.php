@@ -1,6 +1,8 @@
 <?php
 namespace Firebase;
 
+include_once( dirname(__FILE__) . "/FirebaseInterface.php");
+
 use \Exception;
 
 
@@ -20,7 +22,7 @@ use \Exception;
  * @link   https://www.firebase.com/docs/rest-api.html
  *
  */
-class FirebaseLib implements FirebaseInterface
+class Firebase implements FirebaseInterface
 {
     private $_baseURI;
     private $_timeout;

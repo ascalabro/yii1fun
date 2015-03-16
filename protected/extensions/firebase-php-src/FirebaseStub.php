@@ -1,6 +1,8 @@
 <?php
 namespace Firebase;
 
+include_once( dirname(__FILE__) . "/FirebaseInterface.php");
+
 /**
  * Class FirebaseStub
  *
