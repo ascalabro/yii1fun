@@ -22,7 +22,7 @@ use \Exception;
  * @link   https://www.firebase.com/docs/rest-api.html
  *
  */
-class Firebase implements FirebaseInterface
+class FirebaseLib implements FirebaseInterface
 {
     private $_baseURI;
     private $_timeout;
