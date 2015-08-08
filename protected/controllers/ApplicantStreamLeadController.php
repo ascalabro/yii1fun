@@ -38,7 +38,7 @@ class ApplicantStreamLeadController extends Controller
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
+				'actions'=>array('admin','delete','list'),
 				'users'=>array('@')
 			),
 			array('deny',  // deny all users
@@ -57,6 +57,40 @@ class ApplicantStreamLeadController extends Controller
 			'model'=>$this->loadModel($id),
 		));
 	}
+        
+        public function actionList($type = null) 
+        {
+            switch ($type) {
+                case "email":
+                    foreach(ApplicantStreamLead::model()->findAll() as $applicant) {
+                        $data[] = $applicant->email_address;
+                    }
+
+                    break;
+                case "name" :
+                    foreach(ApplicantStreamLead::model()->findAll() as $applicant) {
+                        $data[] = array(
+                            "first_name" => $applicant->first_name,
+                            "last_name" => $applicant->last_name
+                                );
+                    }
+                    break;
+                default:
+                    foreach(ApplicantStreamLead::model()->findAll() as $applicant) {
+                        $data[] = array(
+                            "id" => $applicant->id,
+                            "first_name" => $applicant->first_name,
+                            "last_name" => $applicant->last_name,
+                            "job_board" => $applicant->job_board,
+                            "main_phone" => $applicant->main_phone,
+                            "cell_phone" => $applicant->cell_phone 
+                                );
+                    }
+                    break;
+            }
+            
+            echo CJSON::encode($data);
+        }
 
 	/**
 	 * Creates a new model.

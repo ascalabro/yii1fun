@@ -28,6 +28,22 @@ $('.search-form form').submit(function(){
 
 <h1>Manage Applicant Stream Leads</h1>
 
+<div class="btn-toolbar">
+    <?php $this->widget('bootstrap.widgets.TbButtonGroup', array(
+        'type'=>'info', // '', 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
+        'buttons'=>array(
+            array('label'=>'JSON Feed', 'url'=>'#'),
+            array('items'=>array(
+                array('label'=>'List All / All Attributes', 'url'=>array('list')),
+                array('label'=>'List All / Emails only', 'url'=>Yii::app()->createUrl("applicantStreamLead/list", array("type"=>"email"))),
+                array('label'=>'List All / First and last names only', 'url'=>Yii::app()->createUrl("applicantStreamLead/list", array("type"=>"name"))),
+                '---',
+                array('label'=>'Search', 'url'=>'#'),
+            )),
+        ),
+    )); ?>
+</div>
+
 <p>
 You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
 or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
@@ -40,10 +56,12 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 )); ?>
 </div><!-- search-form -->
 
-<?php $this->widget('zii.widgets.grid.CGridView', array(
+<?php $this->widget('bootstrap.widgets.TbGridView', array(
+    'type'=>'striped bordered condensed',
 	'id'=>'applicant-stream-lead-grid',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
+        'template'=>"{items}",
 	'columns'=>array(
 		'id',
 		'first_name',
@@ -55,7 +73,8 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'cell_phone',
 		*/
 		array(
-			'class'=>'CButtonColumn',
-		),
+                    'class'=>'bootstrap.widgets.TbButtonColumn',
+                    'htmlOptions'=>array('style'=>'width: 50px'),
+                ),
 	),
 )); ?>
