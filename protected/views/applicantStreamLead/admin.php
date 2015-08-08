@@ -32,7 +32,7 @@ $('.search-form form').submit(function(){
     <?php $this->widget('bootstrap.widgets.TbButtonGroup', array(
         'type'=>'info', // '', 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
         'buttons'=>array(
-            array('label'=>'JSON Feed', 'url'=>'#'),
+            array('label'=>'JSON Feed', 'url'=>array('list')),
             array('items'=>array(
                 array('label'=>'List All / All Attributes', 'url'=>array('list')),
                 array('label'=>'List All / Emails only', 'url'=>Yii::app()->createUrl("applicantStreamLead/list", array("type"=>"email"))),

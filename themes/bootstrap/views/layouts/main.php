@@ -107,9 +107,22 @@ return false;
                         array('label' => 'About', 'url' => array('/site/page', 'view' => 'about')),
 //                        array('label' => 'Contact', 'url' => array('/site/contact')),
                         // array('label' => 'Portfolio', 'url' => array('/project/index'), 'visible' => !Yii::app()->user->isGuest),
-                        array('label' => 'Profile', 'url' => array('/userProfile/view/id/' . Yii::app()->user->id), 'visible' => !Yii::app()->user->isGuest),
+//                        array('label' => 'Profile', 'url' => array('/userProfile/view/id/' . Yii::app()->user->id), 'visible' => !Yii::app()->user->isGuest),
 //			array('label' => 'Mp3 Player', 'url' => '#', 'itemOptions' => array('onclick' => 'js: launchSoundManagerMp3Player()'), 'visible' => Yii::app()->user->name == 'ascalabro'),
-                        array('label' => 'Applicant Stream', 'url' => array('/applicantStreamLead/admin/'), 'visible' => !Yii::app()->user->isGuest),
+//                        array('label' => 'Applicant Stream', 'url' => array('/applicantStreamLead/admin/'), 'visible' => !Yii::app()->user->isGuest),
+                        array('label' => 'Email list', 'items' => array(
+                                '...',
+                                array('label' => 'Admin', 'url' => array('/applicantStreamLead/admin/')),
+                                array('label' => 'Other', 'url' => array('#'),
+                                    'items'=> array(
+                                        array('label'=>'Stuff', 'url' => array('#'))
+                                    )
+                                ),
+//                                array('label'=>'Poker',  'url' => Yii::app()->getBaseUrl(true) . '/index.php/Tools/Poker'
+//                                    ),
+                            ),
+                            'visible'=>!Yii::app()->user->isGuest
+                        ),
                         array('label' => 'Tools', 'items' => array(
                                 '...',
                                 array('label' => 'All', 'url' => array('/Tools/categories/index')),

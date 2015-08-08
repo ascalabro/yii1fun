@@ -74,6 +74,7 @@ class ApplicantStreamLeadController extends Controller {
                 }
                 break;
             default:
+                $type = "all";
                 foreach (ApplicantStreamLead::model()->findAll() as $applicant) {
                     $data[] = array(
                         "id" => $applicant->id,
@@ -89,7 +90,7 @@ class ApplicantStreamLeadController extends Controller {
 
         echo CJSON::encode(array(
             array(
-                "searchType" => "all"
+                "searchType" => $type
             ),
             array(
                 "data" => $data)
