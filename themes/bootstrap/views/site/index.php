@@ -14,30 +14,25 @@ background-color:rgba(163, 251, 226, 0.39);
 .thumbnail:hover {
 background-color:rgba(163,251,225,0.2);
 }
-");
 
-Yii::app()->clientScript->registerScript('chover', '
-/*
-$(".thumbnail").hover(function() {
-    $(this).find(".lh").css("font-size","130%");
-},
-function() {
-    $(this).find(".lh").css("font-size","100%");
+img.center {
+    margin-right: 50%;
+    margin-left: 50%;
 }
-);
-*/
-$(document).ready(function() {
-    $(".thumbnail").each(function(index) {
-        var captionImage = $(this).find("td:first font").html();
-        var boldTitle = $(this).find(".lh font:first").text();
-        var articleLink = $(this).find(".lh a:first").attr(\'href\');
-        if (captionImage == ""){
-            $(this).find("td:first").html("<a href=\'" + articleLink + "\'><img src=\'' . Yii::app()->getBaseUrl() . '/images/businessgeneric.jpg' . '\'><br><font size=\'-2\'>" + boldTitle + "</font></a>");
-        }
-    });
+");
+Yii::app()->clientScript->registerScriptFile(Yii::app()->assetManager->publish(dirname(__FILE__) . '/js/functions.js'), CClientScript::POS_BEGIN);
+Yii::app()->clientScript->registerScript('readery', '
+$(".thumbnail").each(function(index) {
+    var captionImage = $(this).find("td:first font").html();
+    var boldTitle = $(this).find(".lh font:first").text();
+    var articleLink = $(this).find(".lh a:first").attr(\'href\');
+    if (captionImage == ""){
+        $(this).find("td:first").html("<a href=\'" + articleLink + "\'><img src=\'' . Yii::app()->getBaseUrl() . '/images/businessgeneric.jpg' . '\'><br><font size=\'-2\'>" + boldTitle + "</font></a>");
+    }
 });
-
-');
+refreshNewsFeed();
+$(".news-container section").html(\'' . CHtml::image(Yii::app()->getBaseUrl() . '/images/ring-alt.gif', "loading content...",array("class" => "center")) . '\');
+', CClientScript::POS_READY);
 
 $this->pageTitle=Yii::app()->name;
 
@@ -56,8 +51,21 @@ $this->pageTitle=Yii::app()->name;
         array('image'=>Yii::app()->baseUrl.'/images/palmbeachE.jpg' , 'label'=>'Third Thumbnail label'),
     ),
 )); ?>
+<div class="news-container well">
+<section>
+<?php /** @var BootActiveForm $form */
+$form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
+    'id'=>'searchForm',
+    'type'=>'search',
+    'htmlOptions'=>array('class'=>'well'),
+)); ?>
 
-<?php // CVarDumper::dump($data,'20',true); ?>
+<?php echo CHtml::label( 'Change news content keywords: ', "searchFor"); ?>
+<?php echo CHtml::textField( 'searchFor', Yii::app()->params['newsKeywords'], array('class'=>'input-medium', 'prepend'=>'<i class="icon-search"></i>')); ?>
+<?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'submit', 'label'=>'Go')); ?>
+<?php $this->endWidget(); ?>
+
+<p>
 <div class="row-fluid">
     <ul class="thumbnails">
 <?php for($i = 0; $i < 3; $i++): ?>
@@ -74,7 +82,8 @@ $this->pageTitle=Yii::app()->name;
 <?php endfor; ?>
             </ul>
           </div>
-
+</section>
+</div>
 <?php
 Yii::app()->clientScript->registerCss('css', "
 

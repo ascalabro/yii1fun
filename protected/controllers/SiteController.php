@@ -102,7 +102,7 @@ class SiteController extends Controller {
         Yii::app()->user->logout();
         $this->redirect(Yii::app()->homeUrl);
     }
-    
+
     public function actionLoadMp3Playlist() {
         $files = CFileHelper::findFiles(Yii::app()->params['mp3filespath'] . '/' . Yii::app()->user->name);
         shuffle($files);
@@ -119,6 +119,10 @@ class SiteController extends Controller {
             }
         }
         echo json_encode($files);
+    }
+
+    public function actionRenderRefreshNewsFeed($term = null) {
+        echo "asdfasdf";
     }
 
 }
