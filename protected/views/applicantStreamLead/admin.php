@@ -61,7 +61,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	'id'=>'applicant-stream-lead-grid',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
-        'template'=>"{items}",
+        'template'=>"{items}\n{pager}",
 	'columns'=>array(
 		'id',
 		'first_name',
@@ -69,9 +69,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'job_board',
 		'email_address',
 		'main_phone',
-		/*
 		'cell_phone',
-		*/
 		array(
                     'class'=>'bootstrap.widgets.TbButtonColumn',
                     'htmlOptions'=>array('style'=>'width: 50px'),
