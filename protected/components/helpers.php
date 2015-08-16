@@ -21,5 +21,5 @@ function writeLog($msg, $logName = '') {
 
 function dd($var) {
     CVarDumper::dump($var, 20, true);
-    die();
+    Yii::app()->end();
 }

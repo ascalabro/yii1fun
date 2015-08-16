@@ -121,8 +121,9 @@ class SiteController extends Controller {
         echo json_encode($files);
     }
 
-    public function actionRenderRefreshNewsFeed($term = null) {
-        echo "asdfasdf";
+    public function actionRenderRefreshNewsFeed() {        
+        $term = Yii::app()->request->getParam("term");
+        return $this->renderPartial("_newsFeed", array('data' => GoogleNewsFeed::fetchRssFeed($term)));
     }
 
 }
