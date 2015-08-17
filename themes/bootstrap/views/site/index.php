@@ -33,7 +33,6 @@ $(".thumbnail").each(function(index) {
     }
 });
 refreshNewsFeed();
-
 ', CClientScript::POS_READY);
 
 $this->pageTitle=Yii::app()->name;
@@ -63,9 +62,7 @@ $this->pageTitle=Yii::app()->name;
 </div>
 <?php
 Yii::app()->clientScript->registerCss('css', "
-
 .carousel-control {
-display: none;
-
+    display: none;
 }
 ");

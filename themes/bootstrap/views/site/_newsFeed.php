@@ -9,7 +9,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 )); ?>
 
 <?php echo CHtml::label( 'Change news content keywords: ', "term"); ?>
-<?php echo CHtml::textField( 'term', Yii::app()->params['newsKeywords'], array('class'=>'input-medium', 'id' => 'newsSearchTerm', 'prepend'=>'<i class="icon-search"></i>')); ?>
+<?php echo CHtml::textField( 'term', $term, array('class'=>'input-medium', 'id' => 'newsSearchTerm', 'prepend'=>'<i class="icon-search"></i>')); ?>
 <?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'button', 'label'=>'Go', 'htmlOptions'=> array('onclick' => "js: refreshNewsFeed(1);"))); ?>
 <?php $this->endWidget(); ?>
 

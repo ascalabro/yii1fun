@@ -122,8 +122,8 @@ class SiteController extends Controller {
     }
 
     public function actionRenderRefreshNewsFeed() {        
-        $term = Yii::app()->request->getParam("term");
-        return $this->renderPartial("_newsFeed", array('data' => GoogleNewsFeed::fetchRssFeed($term)));
+        $term = Yii::app()->request->getParam("term") ? Yii::app()->request->getParam("term") : Yii::app()->params['newsKeywords'];
+        return $this->renderPartial("_newsFeed", array('term' => $term, 'data' => GoogleNewsFeed::fetchRssFeed($term)));
     }
 
 }
