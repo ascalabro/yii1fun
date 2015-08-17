@@ -1,7 +1,9 @@
 <?php
 /* @var $this SiteController */
 Yii::app()->clientScript->registerCss('cssa', "
-
+.loading-img-container {
+    display: none;
+}
 .hero-unit {
 background-color: rgba(238, 238, 238, 0.1);
 margin-bottom: 0;
@@ -14,37 +16,31 @@ background-color:rgba(163, 251, 226, 0.39);
 .thumbnail:hover {
 background-color:rgba(163,251,225,0.2);
 }
-");
 
-Yii::app()->clientScript->registerScript('chover', '
-/*
-$(".thumbnail").hover(function() {
-    $(this).find(".lh").css("font-size","130%");
-},
-function() {
-    $(this).find(".lh").css("font-size","100%");
+img.center {
+    margin-right: 50%;
+    margin-left: 50%;
 }
-);
-*/
-$(document).ready(function() {
-    $(".thumbnail").each(function(index) {
-        var captionImage = $(this).find("td:first font").html();
-        var boldTitle = $(this).find(".lh font:first").text();
-        var articleLink = $(this).find(".lh a:first").attr(\'href\');
-        if (captionImage == ""){
-            $(this).find("td:first").html("<a href=\'" + articleLink + "\'><img src=\'' . Yii::app()->getBaseUrl() . '/images/businessgeneric.jpg' . '\'><br><font size=\'-2\'>" + boldTitle + "</font></a>");
-        }
-    });
+");
+Yii::app()->clientScript->registerScriptFile(Yii::app()->assetManager->publish(dirname(__FILE__) . '/js/functions.js'), CClientScript::POS_BEGIN);
+Yii::app()->clientScript->registerScript('readery', '
+$(".thumbnail").each(function(index) {
+    var captionImage = $(this).find("td:first font").html();
+    var boldTitle = $(this).find(".lh font:first").text();
+    var articleLink = $(this).find(".lh a:first").attr(\'href\');
+    if (captionImage == ""){
+        $(this).find("td:first").html("<a href=\'" + articleLink + "\'><img src=\'' . Yii::app()->getBaseUrl() . '/images/businessgeneric.jpg' . '\'><br><font size=\'-2\'>" + boldTitle + "</font></a>");
+    }
 });
-
-');
+refreshNewsFeed();
+', CClientScript::POS_READY);
 
 $this->pageTitle=Yii::app()->name;
 
 ?>
 
 <?php $this->beginWidget('booster.widgets.TbJumbotron',array(
-    'heading'=>'Welcome to '.CHtml::encode(Yii::app()->name),
+//    'heading'=>'Welcome to '.CHtml::encode(Yii::app()->name),
 )); ?>
 
 <?php $this->endWidget(); ?>
@@ -56,30 +52,17 @@ $this->pageTitle=Yii::app()->name;
         array('image'=>Yii::app()->baseUrl.'/images/palmbeachE.jpg' , 'label'=>'Third Thumbnail label'),
     ),
 )); ?>
+<div class="news-container well">
+    <div class="loading-img-container">
+        <img class="center" id="loading-gif" src="/images/ring-alt.gif" alt="loading content...">
+    </div>
+<section>
 
-<?php // CVarDumper::dump($data,'20',true); ?>
-<div class="row-fluid">
-    <ul class="thumbnails">
-<?php for($i = 0; $i < 3; $i++): ?>
-    <li class="span4">
-                <div class="thumbnail">
-                  <!--<img data-src="holder.js/300x200" alt="300x200" src="data:image/png;base64,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" style="width: 300px; height: 200px;">-->
-                  <div class="caption">
-                    <h3><?php echo $data->channel->item[$i]->title ?></h3>
-                    <p><?php echo $data->channel->item[$i]->description ?></p>
-                   <p><a href="<?php echo $data->channel->item[$i]->link ?>" class="btn btn-primary">View Story</a> <!-- <a href="#" class="btn">Action</a></p>-->
-                  </div>
-                </div>
-              </li>
-<?php endfor; ?>
-            </ul>
-          </div>
-
+</section>
+</div>
 <?php
 Yii::app()->clientScript->registerCss('css', "
-
 .carousel-control {
-display: none;
-
+    display: none;
 }
 ");
