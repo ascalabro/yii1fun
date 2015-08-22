@@ -11,7 +11,8 @@ function refreshNewsFeed(searchQuery) {
         url: 'index.php?r=site/renderRefreshNewsFeed',
         data: searchQuery,
         error: function (msg) {
-            console.log("my object: %o", msg);
+            showArticleHtml(msg);
+            console.log("the error: %o", msg);
         },
         complete: function (jqXHR, textStatus) {
             $("#searchForm").submit(function() {
@@ -21,8 +22,12 @@ function refreshNewsFeed(searchQuery) {
         },
         type: 'POST',
         success: function (data) {
-            $(".loading-img-container").slideUp(1000);
-            newsContainer.html(data).slideDown(1000);
-        },
+            showArticleHtml(data);
+        }
     });
+}
+
+function showArticleHtml(data) {
+    $(".loading-img-container").slideUp(1000);
+    $(".news-container section").html(data).slideDown(1000);
 }

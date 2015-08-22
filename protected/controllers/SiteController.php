@@ -3,6 +3,8 @@
 class SiteController extends Controller {
 
     public $layout = '//layouts/column2';
+    
+    const AJAX_FETCH_ERROR_MESSAGE_TRY_AGAIN = "Error retreiving data. Try again.";
 
     public function accessRules() {
         return array('allow',
@@ -121,9 +123,14 @@ class SiteController extends Controller {
         echo json_encode($files);
     }
 
-    public function actionRenderRefreshNewsFeed() {        
+    public function actionRenderRefreshNewsFeed() { 
         $term = Yii::app()->request->getParam("term") ? Yii::app()->request->getParam("term") : Yii::app()->params['newsKeywords'];
-        return $this->renderPartial("_newsFeed", array('term' => $term, 'data' => GoogleNewsFeed::fetchRssFeed($term)));
+        try {
+            $data = GoogleNewsFeed::fetchRssFeed($term);
+        } catch (Exception $exc) {
+            $data = new CException(self::AJAX_FETCH_ERROR_MESSAGE_TRY_AGAIN);
+        }
+        return $this->renderPartial("_newsFeed", compact('term', 'data'));
     }
 
 }
