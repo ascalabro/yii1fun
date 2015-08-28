@@ -8,10 +8,9 @@ function refreshNewsFeed(searchQuery) {
     $("#containerDiv").animate({ scrollTop: 0 }, "fast");
     var searchQuery = $("#searchForm").serialize();
     $.ajax({
-        url: 'index.php?r=site/renderRefreshNewsFeed',
+        url: 'index.php/site/renderRefreshNewsFeed',
         data: searchQuery,
         error: function (msg) {
-            showArticleHtml(msg);
             console.log("the error: %o", msg);
         },
         complete: function (jqXHR, textStatus) {

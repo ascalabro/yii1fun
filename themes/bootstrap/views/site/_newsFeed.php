@@ -15,7 +15,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 
 <p>
 <div class="row-fluid">
-<?php if ($data instanceof SimpleXMLElement): ?>
+<?php if ($data instanceof SimpleXMLElement && count($data->channel->item) >= 3):  ?>
     <ul class="thumbnails">
             <?php for($i = 0; $i < 3; $i++): ?>
     <li class="span4">
@@ -32,5 +32,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
             </ul>
 <?php elseif($data instanceof CException): ?>
     <?php echo $data->getMessage(); ?>
+<?php else: ?>
+    No news articles found for search term `<?php echo $term; ?>`
 <?php endif; ?>
           </div>

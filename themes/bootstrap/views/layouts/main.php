@@ -104,11 +104,11 @@ return false;
                     'submenuHtmlOptions' => array('class' => 'multi-level'),
                     'items' => array(
                         array('label' => 'Home', 'url' => array('/site/index')),
-                        array('label' => 'About', 'url' => array('/site/page', 'view' => 'about')),
+//                        array('label' => 'About', 'url' => array('/site/page', 'view' => 'about')),
 //                        array('label' => 'Contact', 'url' => array('/site/contact')),
-                        // array('label' => 'Portfolio', 'url' => array('/project/index'), 'visible' => !Yii::app()->user->isGuest),
+//                        array('label' => 'Portfolio', 'url' => array('/project/index'), 'visible' => !Yii::app()->user->isGuest),
 //                        array('label' => 'Profile', 'url' => array('/userProfile/view/id/' . Yii::app()->user->id), 'visible' => !Yii::app()->user->isGuest),
-//			array('label' => 'Mp3 Player', 'url' => '#', 'itemOptions' => array('onclick' => 'js: launchSoundManagerMp3Player()'), 'visible' => Yii::app()->user->name == 'ascalabro'),
+//			           array('label' => 'Mp3 Player', 'url' => '#', 'itemOptions' => array('onclick' => 'js: launchSoundManagerMp3Player()'), 'visible' => Yii::app()->user->name == 'ascalabro'),
 //                        array('label' => 'Applicant Stream', 'url' => array('/applicantStreamLead/admin/'), 'visible' => !Yii::app()->user->isGuest),
                         array('label' => 'Email list', 'items' => array(
                                 '...',

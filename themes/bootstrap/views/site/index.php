@@ -22,7 +22,7 @@ img.center {
     margin-left: 50%;
 }
 ");
-Yii::app()->clientScript->registerScriptFile(Yii::app()->assetManager->publish(dirname(__FILE__) . '/js/functions.js'), CClientScript::POS_BEGIN);
+Yii::app()->clientScript->registerScriptFile(Yii::app()->assetManager->publish(dirname(__FILE__) . '/js/functions.js'), CClientScript::POS_HEAD);
 Yii::app()->clientScript->registerScript('readery', '
 $(".thumbnail").each(function(index) {
     var captionImage = $(this).find("td:first font").html();
