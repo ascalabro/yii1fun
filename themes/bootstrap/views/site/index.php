@@ -46,11 +46,7 @@ $this->pageTitle=Yii::app()->name;
 <?php $this->endWidget(); ?>
 
 <?php $this->widget('bootstrap.widgets.TbCarousel', array(
-    'items'=>array(
-        array('image'=>Yii::app()->baseUrl.'/images/sunriseE.jpg' , 'label'=>'First Thumbnail label'),
-        array('image'=>Yii::app()->baseUrl.'/images/smokymountainsE.jpg' , 'label'=>'Second Thumbnail label'),
-        array('image'=>Yii::app()->baseUrl.'/images/palmbeachE.jpg' , 'label'=>'Third Thumbnail label'),
-    ),
+    'items'=>$carouselItems
 )); ?>
 <div class="news-container well">
     <div class="loading-img-container">

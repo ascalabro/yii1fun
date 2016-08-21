@@ -35,8 +35,9 @@ class SiteController extends Controller {
      */
     public function actionIndex() {
         $this->layout = '//layouts/main';
+        $carouselItems = $this->getCarouselItems();
         $feedxml = simplexml_load_file("https://news.google.com/news/feeds?output=rss&q=" . Yii::app()->params['newsKeywords']);
-        $this->render('index',array('data'=>$feedxml));
+        $this->render('index',array('data'=>$feedxml,'carouselItems'=>$carouselItems));
     }
 
     /**
@@ -133,4 +134,12 @@ class SiteController extends Controller {
         return $this->renderPartial("_newsFeed", compact('term', 'data'));
     }
 
+    public function getCarouselItems() {
+        $carouselImages = NasaImageFeed::getCarouselImageUrls();
+        $items = array();
+        foreach($carouselImages as $i => $imageUrl) {
+            $items[] = array('image'=>$imageUrl, 'label'=>'NASA images');
+        }
+        return $items;
+    }
 }
